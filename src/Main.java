@@ -34,10 +34,10 @@ class MovablePoint implements Movable{
     int x, y,x1,y1;
 
     public void move(int a, int b) {
-        x=x1;
-        y=y1;
-        x1=x+a;
-        y1=y+b;
+        x1=x;
+        y1=y;
+        x=x1+a;
+        y=y1+b;
     }
 
     public int getX() {
@@ -105,6 +105,8 @@ class MovableRectangle extends Rectangle implements Movable{
 
     @Override
     public boolean checkSpeed() {
+        if (leftH.x-leftH.x1==rightB.x-rightB.x1 && leftH.y-leftH.y1==rightB.y-rightB.y1)
+            return true;
         return false;
     }
 }
@@ -134,9 +136,11 @@ public class Main {
         System.out.print("Конечный y:");
         point2=scanner.nextInt();
         movableRectangle.move(point1,point2);
-
-        System.out.println("----");
-        movableRectangle.getLeftH();movableRectangle.getRightB();
-        System.out.println("----");
+        if (movableRectangle.checkSpeed()==true) {
+            System.out.println("----");
+            movableRectangle.getLeftH();
+            movableRectangle.getRightB();
+            System.out.println("----");
+        }
     }
 }
